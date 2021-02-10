@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "pattern": "app-water-mask[^.]*(?!\.dev)\..*.cwl$",
+      "regexp" : true,
+      "target": "cpe/app-packages/production/"
+    },
+    {
+      "pattern": "app-water-mask.*.dev.*.cwl",
+      "regexp" : true,
+      "target": "cpe/app-packages/acceptance/"
+    }
+  ]
+}
