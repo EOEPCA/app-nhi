@@ -28,8 +28,10 @@ pipeline {
             agent { node { label 'artifactory' } }
             steps {
                 echo 'Deploying application package artifact'
-        
-                sh "cat app-water-mask.cwl | sed \"s/placeholder/${dockerRegistry}\\/${dockerTag}:${mType}${dockerNewVersion}/g\" > \$( echo app-water-mask.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
+
+                sh "sed -i \"s/placeholder/${dockerRegistry}\\/${dockerTag}:${mType}${dockerNewVersion}/g\" app-water-mask.cwl"
+
+                sh "cp app-water-mask.cwl \$( echo app-water-mask.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
 
                 script {
                     def server = Artifactory.server "repository.terradue.com"
