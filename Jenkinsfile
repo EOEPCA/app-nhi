@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Deploying application package artifact'
         
-                sh "cp app-water-mask.cwl \$( echo app-water-mask.cwl | sed \"s/\.cwl/${appType}${dockerNewVersion}\.cwl/\" )"
+                sh "cp app-water-mask.cwl \$( echo app-water-mask.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
 
                 script {
                     def server = Artifactory.server "repository.terradue.com"
