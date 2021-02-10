@@ -1,0 +1,3 @@
+input_reference: {class: Directory, path: '/workspace/stage-in/1_o28lv8'}
+s_expression: '(where (<= (/ (- nir red) (+ nir swir22)) -0.3) 1 0)'
+cbn: 'water-mask'

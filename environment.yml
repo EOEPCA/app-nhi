@@ -1,0 +1,11 @@
+name: env_app_snuggs
+channels:
+  - terradue
+  - conda-forge
+dependencies:
+  - python
+  - click
+  - click2cwl
+  - gdal=3.1.4
+  - snuggs
+  - pystac
