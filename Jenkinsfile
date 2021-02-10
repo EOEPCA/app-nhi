@@ -31,6 +31,8 @@ pipeline {
 
                 sh "sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" app-water-mask.cwl"
 
+                sh "sed -i \"s/versionholder/{dockerNewVersion}/g\" app-water-mask.cwl"
+
                 sh "cp app-water-mask.cwl \$( echo app-water-mask.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
 
                 script {

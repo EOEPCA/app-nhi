@@ -48,6 +48,7 @@ $graph:
 $namespaces:
   s: https://schema.org/
 cwlVersion: v1.0
+s:softwareVersion: versionholder
 schemas:
 - http://schema.org/version/9.0/schemaorg-current-http.rdf
 
