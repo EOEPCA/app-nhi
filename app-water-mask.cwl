@@ -4,7 +4,7 @@ $graph:
   class: CommandLineTool
   hints:
     DockerRequirement:
-      dockerPull: s-express:latest
+      dockerPull: placeholder
   id: clt
   inputs:
     input_reference:
