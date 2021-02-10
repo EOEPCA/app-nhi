@@ -1,0 +1,7 @@
+ADES_STAGEOUT_AWS_ACCESS_KEY_ID: myaccesskey
+ADES_STAGEOUT_AWS_PROFILE: minio
+ADES_STAGEOUT_AWS_SECRET_ACCESS_KEY: mysecretkey
+ADES_STAGEOUT_AWS_SERVICEURL: https://api.charter.uat.esaportal.eu 
+ADES_STAGEOUT_OUTPUT: s3://processing-results/wf-s-expression-ndvi
+input_reference: 
+- 'https://catalog.terradue.com:443/sentinel2/search?uid=S2B_MSIL1C_20210105T100319_N0209_R122_T33TUF_20210105T111236&do=[terradue]'
