@@ -30,10 +30,10 @@ def get_asset(item, band_name):
     if (eo_item.bands) is not None:
 
         for index, band in enumerate(eo_item.bands):
-
+            print(band.common_name, band_name)
             if band.common_name in [band_name]:
-
-                asset = item.assets[band.name]
+                print(item.assets.keys())
+                asset = item.assets[band.name.replace('-10m', '')]
                 asset_href = fix_asset_href(asset.get_absolute_href())
                 break
 
