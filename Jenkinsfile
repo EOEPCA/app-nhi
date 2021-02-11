@@ -30,7 +30,7 @@ pipeline {
                 script {
                     echo 'Deploying application package artifacts'
 
-                    for (app in ['app-s-expression.cwl', 'app-water-mask.cwl']) {
+                    for (app in ['app-s-expression.cwl', 'app-water-mask.cwl', 'app-ndvi.cwl']) {
                         
                         sh "app=${app}; sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" ${app}"
 
