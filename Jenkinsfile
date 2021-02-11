@@ -32,13 +32,13 @@ pipeline {
 
                     for (app in ['app-s-expression.cwl', 'app-water-mask.cwl']) {
                         
-                        sh "app=${app}; sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" $app.cwl"
+                        sh "app=${app}; sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" ${app}.cwl"
 
-                        sh "app=${app}; sed -i \"s/versionholder/${dockerNewVersion}/g\" $app.cwl"
+                        sh "app=${app}; sed -i \"s/versionholder/${dockerNewVersion}/g\" ${app}.cwl"
 
-                        sh "app=${app}; cp $app.cwl \$( echo $app.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
+                        sh "app=${app}; cp ${app}.cwl \$( echo ${app}.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
                     }
-                    
+
                     def server = Artifactory.server "repository.terradue.com"
                     def uploadSpec = readFile 'artifactdeploy.json'
                     def buildInfo = server.upload spec: uploadSpec
