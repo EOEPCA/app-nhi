@@ -29,12 +29,8 @@ pipeline {
             steps {
                 echo 'Deploying application package artifact'
 
-                sh "sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" app-water-mask.cwl"
-
-                sh "sed -i \"s/versionholder/${dockerNewVersion}/g\" app-water-mask.cwl"
-
-                sh "cp app-water-mask.cwl \$( echo app-water-mask.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
-
+                sh "for app in app-s-expression.cwl app-water-mask.cwl; do sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" $app.cwl; sed -i \"s/versionholder/${dockerNewVersion}/g\" $app.cwl; cp $app.cwl \$( echo $app.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" ); done"
+                
                 script {
                     def server = Artifactory.server "repository.terradue.com"
                     def uploadSpec = readFile 'artifactdeploy.json'
