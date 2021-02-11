@@ -27,9 +27,17 @@ pipeline {
         stage('Publish Artifact') {
             agent { node { label 'artifactory' } }
             steps {
-                echo 'Deploying application package artifact'
+                echo 'Deploying application package artifacts'
 
-                sh "for app in app-s-expression.cwl app-water-mask.cwl; do sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" $app.cwl; sed -i \"s/versionholder/${dockerNewVersion}/g\" $app.cwl; cp $app.cwl \$( echo $app.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" ); done"
+                for (app in ['app-s-expression.cwl', 'app-water-mask.cwl']) {
+                    
+                    sh "app=${app}; sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" $app.cwl"
+
+                    sh "app=${app}; sed -i \"s/versionholder/${dockerNewVersion}/g\" $app.cwl"
+
+                    sh "app=${app}; cp $app.cwl \$( echo $app.cwl | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
+
+                }
                 
                 script {
                     def server = Artifactory.server "repository.terradue.com"
