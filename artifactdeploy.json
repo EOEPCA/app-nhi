@@ -1,12 +1,12 @@
 {
   "files": [
     {
-      "pattern": "app-water-mask[^.]*(?!\.dev)\..*.cwl$",
+      "pattern": "app-[^.]*(?!\.dev)\..*.cwl$",
       "regexp" : true,
       "target": "cpe/app-packages/production/"
     },
     {
-      "pattern": "app-water-mask.*.dev.*.cwl",
+      "pattern": "app-.*.dev.*.cwl",
       "regexp" : true,
       "target": "cpe/app-packages/acceptance/"
     }
