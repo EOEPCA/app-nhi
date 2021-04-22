@@ -34,7 +34,7 @@ pipeline {
 
                     sh "docker run --rm ${dockerTag}:${mType}${dockerNewVersion} ${app} -i dummy --docker ${dockerTag}:${mType}${dockerNewVersion} --dump cwl --metadata version=${dockerNewVersion}  > app-${app}${appType}${dockerNewVersion}.cwl"
 
-
+                    sh "cat app-${app}${appType}${dockerNewVersion}.cwl"
 
                 }
             }  
