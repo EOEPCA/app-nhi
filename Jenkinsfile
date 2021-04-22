@@ -25,7 +25,7 @@ pipeline {
         }
 
         stage('Publish Artifact') {
-            agent { node { label 'artifactory' } }
+            agent any
             steps {
                 script {
                     echo 'Deploying application package artifacts'
