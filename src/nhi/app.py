@@ -39,7 +39,6 @@ logging.basicConfig(
     "-a", 
     "aoi", 
     help="Area of interest in Well-known Text (WKT)", 
-    type=click.Path(), 
     required=False,
     default=None,
 )
