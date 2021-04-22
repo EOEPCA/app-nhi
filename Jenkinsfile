@@ -1,4 +1,4 @@
-def dockerRegistry = 'docker.com'
+def dockerRegistry = 'registry.hub.docker.com'
 
 pipeline {
     agent any
