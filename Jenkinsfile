@@ -36,6 +36,13 @@ pipeline {
 
                     sh "cat app-${app}${appType}${dockerNewVersion}.cwl"
 
+                  
+                    withAWS(endpointUrl: 'https://s3.fr-par.scw.cloud', credentials:'scaleway-s3') {
+                        def identity=awsIdentity();
+                        // Upload files from working directory to project workspace
+                        s3Upload(file: 'app-${app}${appType}${dockerNewVersion}.cwl', bucket:"app-packages", path: '{app}');
+                    }
+
                 }
             }  
         }
