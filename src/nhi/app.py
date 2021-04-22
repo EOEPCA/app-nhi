@@ -20,7 +20,7 @@ logging.basicConfig(
 
 @click.command(
     short_help="nhi",
-    help="Normalized Hot Spot Indices",
+    help="Normalized Hotspot Indices",
     context_settings=dict(
         ignore_unknown_options=True,
         allow_extra_args=True,
@@ -35,6 +35,13 @@ logging.basicConfig(
     required=True
 )
 @click.option(
+    "--threshold", 
+    "-t", 
+    "threshold", 
+    help="Threshold for hotspot detection", 
+    required=True,
+)
+@click.option(
     "--aoi", 
     "-a", 
     "aoi", 
@@ -43,7 +50,7 @@ logging.basicConfig(
     default=None,
 )
 @click.pass_context
-def main(ctx, input_reference, aoi):
+def main(ctx, input_reference, threshold, aoi):
 
     dump(ctx)
     
@@ -61,7 +68,7 @@ def main(ctx, input_reference, aoi):
         geometry=item.geometry if aoi is None else mapping(loads(aoi)),
         bbox=item.bbox if aoi is None else loads(aoi).bounds,
         datetime=item.datetime, 
-        properties=item.properties,
+        properties={},
         stac_extensions=item.stac_extensions,
     )
 
@@ -71,8 +78,8 @@ def main(ctx, input_reference, aoi):
 
     s_expressions["nhi1"] = "(/ (- swir22 swir16) (+ swir22 swir16))"
     s_expressions["nhi2"] = "(/ (- swir16 nir08) (+ swir16 nir08))"
-    s_expressions["nhi1_bitmask"] = '(where (>= (/ (- swir22 swir16) (+ swir22 swir16)) 0.1) 1 0)'
-    s_expressions["nhi2_bitmask"] = '(where (>= (/ (- swir16 nir08) (+ swir16 nir08)) 0.1) 1 0)'
+    s_expressions["nhi1_bitmask"] = f'(where (>= (/ (- swir22 swir16) (+ swir22 swir16)) {threshold}) 1 0)'
+    s_expressions["nhi2_bitmask"] = f'(where (>= (/ (- swir16 nir08) (+ swir16 nir08)) {threshold}) 1 0)'
 
     for cbn, s_expression in s_expressions.items():
 
