@@ -30,19 +30,6 @@ pipeline {
                 script {
                     echo 'Deploying application package artifacts'
 
-                    for (app in ['app-s-expression.cwl', 'app-water-mask.cwl', 'app-ndvi.cwl']) {
-                        
-                        sh "app=${app}; sed -i \"s/placeholder/${dockerRegistry}\\/${dockerPartialTag}:${mType}${dockerNewVersion}/g\" ${app}"
-
-                        sh "app=${app}; sed -i \"s/versionholder/${dockerNewVersion}/g\" ${app}"
-
-                        sh "app=${app}; cp ${app} \$( echo ${app} | sed \"s/\\.cwl/${appType}${dockerNewVersion}\\.cwl/\" )"
-                    }
-
-                    def server = Artifactory.server "repository.terradue.com"
-                    def uploadSpec = readFile 'artifactdeploy.json'
-                    def buildInfo = server.upload spec: uploadSpec
-                    server.publishBuildInfo buildInfo
                 }
             }  
         }

@@ -5,6 +5,7 @@ import gdal
 import numpy as np
 from collections import OrderedDict
 from .stac import get_asset
+from shapely.wkt import loads
 
 def get_resolution(item, s_expression):
 
@@ -28,7 +29,7 @@ def get_resolution(item, s_expression):
     return resolution
 
 
-def pre_process(item, s_expression):
+def pre_process(item, s_expression, aoi=None):
 
     assets = OrderedDict()
 
@@ -46,17 +47,21 @@ def pre_process(item, s_expression):
 
         _ds = gdal.Open(asset_href)
 
-        if _ds.GetGeoTransform()[1] == resolution:
+        if _ds.GetGeoTransform()[1] == resolution and aoi is None:
 
             assets[common_name] = asset_href
 
         else:
+            # get the lon/lat from the aoi
+            min_lon, min_lat, max_lon, max_lat = loads(aoi).bounds
 
             gdal.Translate(
                 "{}_{}.tif".format(common_name, resolution),
                 _ds,
                 xRes=resolution,
                 yRes=resolution,
+                projWin=[min_lon, max_lat, max_lon, min_lat],
+                projWinSRS="EPSG:4326",
             )
 
             assets[common_name] = "{}_{}.tif".format(common_name, resolution)
@@ -117,10 +122,10 @@ def parse_expression(s_expression):
     return bands
 
 
-def apply_s_expression(item, out_tif, s_expression):
+def apply_s_expression(item, out_tif, s_expression, aoi=None):
     # reads an input tif, applies the expression and writes the output tif
     # uses blocks to reduce the memory footprint
-    asset_hrefs = pre_process(item, s_expression)
+    asset_hrefs = pre_process(item, s_expression, aoi)
 
     ds = gdal.Open(list(asset_hrefs.values())[0])
 
