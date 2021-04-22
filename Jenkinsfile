@@ -38,7 +38,7 @@ pipeline {
 
                   
                     withAWS(endpointUrl: 'https://s3.fr-par.scw.cloud', credentials:'scaleway-s3') {
-                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"app-packages", path: "${app}");
+                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"app-packages", path: "${app}/app-${app}${appType}${dockerNewVersion}.cwl");
                     }
 
                 }
