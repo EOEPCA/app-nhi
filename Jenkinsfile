@@ -1,4 +1,4 @@
-def dockerRegistry = 'docker.terradue.com'
+def dockerRegistry = 'docker.com'
 
 pipeline {
     agent any
@@ -16,7 +16,7 @@ pipeline {
 
                     def app = docker.build("${dockerTag}:${mType}${dockerNewVersion}", "-f .docker/Dockerfile .")
   
-                    docker.withRegistry("https://${dockerRegistry}", 'docker-terradue') {
+                    docker.withRegistry("https://${dockerRegistry}", 'dockerhub-eoepcaci') {
                      app.push("${mType}${dockerNewVersion}")
                       app.push("${mType}latest")
                     }
