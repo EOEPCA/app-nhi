@@ -5,3 +5,4 @@ ADES_STAGEOUT_AWS_SERVICEURL: http://10.160.0.18:9000
 ADES_STAGEOUT_OUTPUT: s3://processing-results/wf-nhi
 input_reference: 
 - 'https://catalog.terradue.com/sentinel2/search?format=atom&uid=S2B_MSIL1C_20210402T095029_N0300_R079_T33SVB_20210402T121737&do=[terradue]'
+threshold: '0.1'
