@@ -42,11 +42,8 @@ pipeline {
                     }
 
                     withAWS(endpointUrl: 'cf2.cloudferro.com:8080', credentials:'workspace-usera') {
-                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera", path: "app-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl");
+                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera", path: "application-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl");
                     }
-
-workspace-usera
-
 
                 }
             }  
