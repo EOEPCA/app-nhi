@@ -1,10 +1,12 @@
-ADES_STAGEOUT_AWS_ACCESS_KEY_ID: minioadmin
-ADES_STAGEOUT_AWS_PROFILE: minio
-ADES_STAGEOUT_AWS_SECRET_ACCESS_KEY: minioadmin
-ADES_STAGEOUT_AWS_SERVICEURL: http://10.160.0.18:9000
-aws_service_url: http://10.160.0.18:9000
-aws_profile: minio
-ADES_STAGEOUT_OUTPUT: s3://processing-results/wf-nhi-1
+IN_AWS_ACCESS_KEY_ID: minioadmin
+IN_AWS_SECRET_ACCESS_KEY: minioadmin
+IN_AWS_SERVICEURL: http://10.160.0.18:9000
+
+OUT_AWS_ACCESS_KEY_ID: minioadmin
+OUT_AWS_SECRET_ACCESS_KEY: minioadmin
+OUT_AWS_SERVICEURL: http://10.160.0.18:9000
+OUTPUT: s3://processing-results/wf-nhi-3
+
 input_reference: 
 - 's3://processing-results/sentinel-2/S2B_MSIL1C_20210409T094029_N0300_R036_T33SVB_20210409T105413/S2B_MSIL1C_20210409T094029_N0300_R036_T33SVB_20210409T105413.json'
 threshold: '0.1'

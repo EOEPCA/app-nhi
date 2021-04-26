@@ -1,7 +1,12 @@
-ADES_STAGEOUT_AWS_ACCESS_KEY_ID: 
-ADES_STAGEOUT_AWS_SECRET_ACCESS_KEY: 
-ADES_STAGEOUT_AWS_SERVICEURL: "https://cf2.cloudferro.com:8080"
-ADES_STAGEOUT_OUTPUT: s3://e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera/processing-results/wf-nhi-1
+IN_AWS_ACCESS_KEY_ID: minioadmin
+IN_AWS_SECRET_ACCESS_KEY: minioadmin
+IN_AWS_SERVICEURL: http://10.160.0.18:9000
+
+OUT_AWS_ACCESS_KEY_ID: ""
+OUT_AWS_SECRET_ACCESS_KEY: ""
+OUT_AWS_SERVICEURL: "https://cf2.cloudferro.com:8080"
+OUTPUT: s3://e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera/processing-results/wf-nhi-3
+
 input_reference: 
-- 'https://catalog.terradue.com/sentinel2/search?format=atom&uid=S2B_MSIL1C_20210409T094029_N0300_R036_T33SVB_20210409T105413&do=[terradue]'
+- 's3://processing-results/sentinel-2/S2B_MSIL1C_20210409T094029_N0300_R036_T33SVB_20210409T105413/S2B_MSIL1C_20210409T094029_N0300_R036_T33SVB_20210409T105413.json'
 threshold: '0.1'
