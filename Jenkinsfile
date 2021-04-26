@@ -50,7 +50,7 @@ pipeline {
 
                     def response = httpRequest url: "https://workspace-api.185.52.193.87.nip.io/workspace/${workspace}/register", 
                                                httpMode: 'POST',
-                                               acceptType: 'APPLICATION_JSON' 
+                                               acceptType: 'APPLICATION_JSON',
                                                contentType: 'APPLICATION_JSON',
                                                validResponseCodes: '200:404',
                                                requestBody: "{\"type\": \"cwl\", \"url\": \"s3://${bucket}/application-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl\"}" 
