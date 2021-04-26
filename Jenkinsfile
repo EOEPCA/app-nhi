@@ -1,4 +1,6 @@
 def dockerRegistry = 'registry.hub.docker.com/eoepcaci'
+def bucket = 'e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera'
+def workspace = 'rm-user-usera'
 
 pipeline {
     agent any
@@ -42,8 +44,14 @@ pipeline {
                     }
 
                     withAWS(endpointUrl: 'cf2.cloudferro.com:8080', credentials:'workspace-usera') {
-                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"e0a5ea9bd7614c97a072fa5b3b8165ea:rm-user-usera", path: "application-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl");
+                        s3Upload(file: "app-${app}${appType}${dockerNewVersion}.cwl", bucket:"${bucket}", path: "application-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl");
                     }
+
+
+                    def response = httpRequest("https://workspace-api.185.52.193.87.nip.io/workspace/workspace/register", httpMode='POST', requestBody="{\"type\": \"cwl\", \"url\": \"s3://${bucket}/application-package/${app}/app-${app}${appType}${dockerNewVersion}.cwl\"}" )
+}
+                    println("Status: "+response.status)
+                    println("Content: "+response.content)
 
                 }
             }  
