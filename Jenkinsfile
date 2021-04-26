@@ -48,7 +48,7 @@ pipeline {
                     }
 
 
-                    def response = httpRequest url: "https://workspace-api.185.52.193.87.nip.io/workspace/${workspace}/register", 
+                    def response = httpRequest url: "https://workspace-api.185.52.193.87.nip.io/workspaces/${workspace}/register", 
                                                httpMode: 'POST',
                                                acceptType: 'APPLICATION_JSON',
                                                contentType: 'APPLICATION_JSON',
